@@ -1,0 +1,46 @@
+{
+  "name": "@lexacode/package-example",
+  "version": "0.0.1",
+  "description": "Example project for TypeScript packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:cjs && npm run build:esm && tsc --outDir build/src && node scripts/build-package.js",
+    "build:cjs": "NODE_ENV=production BABEL_ENV=cjs babel src --presets=./scripts/babel-preset.js --extensions .ts,.tsx --ignore src/**/*.specs.tsx --out-dir build/cjs --source-maps",
+    "build:esm": "NODE_ENV=production BABEL_ENV=esm babel src --presets=./scripts/babel-preset.js --extensions .ts,.tsx --ignore src/**/*.specs.tsx --out-dir build/esm --source-maps"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "typescript": "^4.5.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    },
+    "./icons": {
+      "import": "./esm/icons/index.js",
+      "require": "./cjs/icons/index.js"
+    }
+  },
+  "types": "./src/index.d.ts",
+  "engines": {
+    "node": ">=16.8.0",
+    "npm": ">=7.5.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "Axel Navarro <navarroaxel@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lexacode/package-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lexacode/package-example/issues"
+  },
+  "homepage": "https://github.com/lexacode/package-example"
+}
